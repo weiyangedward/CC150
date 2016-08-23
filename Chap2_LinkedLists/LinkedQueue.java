@@ -12,7 +12,9 @@ class LinkedQueue<Item> implements Iterable<Item>
     private Node<Item> first;
     private Node<Item> last;
 
-
+    /**
+     * constructor
+     */
     public
     LinkedQueue()
     {
@@ -21,30 +23,10 @@ class LinkedQueue<Item> implements Iterable<Item>
         N = 0;
     }
 
-    public
-    boolean isEmpty()
-    {
-        return N == 0;
-    }
-
-    public
-    int size()
-    {
-        return N;
-    }
-
-    public
-    Item peek()
-    {
-        if (isEmpty()) { throw new NoSuchElementException("Queue underflow"); }
-        return first.item;
-    }
-
-    public Node head()
-    {
-        return first;
-    }
-
+    /**
+     * add a new item to the back of queue
+     * @param item
+     */
     public
     void enqueue(Item item)
     {
@@ -57,6 +39,38 @@ class LinkedQueue<Item> implements Iterable<Item>
         N++;
     }
 
+    /**
+     * add a new item to the back of queue
+     * @param item
+     */
+    public void addLast(Item item)
+    {
+        enqueue(item);
+    }
+
+    /**
+     * add a new item to the head of queue
+     * @param item
+     */
+    public void addFirst(Item item)
+    {
+        if (isEmpty())
+        {
+            first = new Node(item);
+            last = first;
+        }
+        else
+        {
+            Node newHead = new Node(item, first);
+            first = newHead;
+        }
+        N++;
+    }
+
+    /**
+     * remove the first item from the queue
+     * @return
+     */
     public
     Item dequeue()
     {
@@ -66,6 +80,28 @@ class LinkedQueue<Item> implements Iterable<Item>
         N--;
         if (isEmpty()) { last = null; }
         return item;
+    }
+
+    /**
+     * remove a node given a key
+     * @param key
+     */
+    public void remove(Item key)
+    {
+        if (isEmpty()) { throw new NoSuchElementException("Queue underflow"); }
+        Node<Item> prev = first;
+        Node<Item> cur = first.next;
+        while (cur != null)
+        {
+            if (cur.item == key)
+            {
+                prev.next = cur.next;
+                N--;
+                break;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
     }
 
     public
@@ -81,6 +117,10 @@ class LinkedQueue<Item> implements Iterable<Item>
         return s.toString();
     }
 
+    /**
+     * return iterator of items in queue
+     * @return
+     */
     public
     Iterator<Item> iterator()
     {
@@ -114,6 +154,49 @@ class LinkedQueue<Item> implements Iterable<Item>
         }
     }
 
+    /**
+     * utility functions
+     */
+    public
+    boolean isEmpty()
+    {
+        return N == 0;
+    }
+
+    public
+    int size()
+    {
+        return N;
+    }
+
+    public
+    Item peek()
+    {
+        if (isEmpty()) { throw new NoSuchElementException("Queue underflow"); }
+        return first.item;
+    }
+
+    public Node head()
+    {
+        return first;
+    }
+
+    public Node tail()
+    {
+        return last;
+    }
+
+    public void mergeList(LinkedQueue<Item> ll)
+    {
+        this.last.next = ll.head();
+        this.last = ll.tail();
+        this.N += ll.size();
+    }
+
+    /**
+     * unit test
+     * @param args
+     */
     public static
     void main(String[] args)
     {

@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 public
 class Node<Item>
 {
@@ -26,6 +28,18 @@ class Node<Item>
         while (n.next != null)
             n = n.next;
         n.next = new Node(item);
+    }
+
+    public Node<Item> find(Item key)
+    {
+        Node<Item> n = this;
+        while (n != null)
+        {
+            if (n.item == key)
+                return n;
+            n = n.next;
+        }
+        return null;
     }
 
     public void Print()
