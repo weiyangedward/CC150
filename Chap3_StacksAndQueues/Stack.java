@@ -83,7 +83,7 @@ public class Stack<Item>
 
     public void Print()
     {
-        for (int i=N-1;i>0;i--)
+        for (int i=N-1;i>=0;i--)
             System.out.print(s[i]);
         System.out.println();
     }
