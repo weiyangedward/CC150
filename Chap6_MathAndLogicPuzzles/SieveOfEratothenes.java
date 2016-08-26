@@ -1,3 +1,6 @@
+/**
+ * O(n) time to find all primes <= max
+ */
 public class SieveOfEratothenes
 {
     private boolean[] isPrime;
