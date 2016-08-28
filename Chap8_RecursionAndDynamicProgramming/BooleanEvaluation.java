@@ -39,7 +39,7 @@ class BooleanEvaluation
 
 
         /**
-         * DP: time O(n^3), space O(n^2)
+         * DP: time O(n^3) (3 for-loops), space O(n^2)
          */
         // for each window size
         for (int gap=1; gap<n; gap++)
